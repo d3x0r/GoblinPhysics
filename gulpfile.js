@@ -4,15 +4,15 @@ var gulp = require( 'gulp' ),
 	jshint = require( 'gulp-jshint' );
 
 gulp.task('lint', function(){
-	gulp.src([
+	return gulp.src([
 		'src/classes/**/*.js'
 	])
 	.pipe( jshint() )
 	.pipe( jshint.reporter( 'default' ) );
 });
 
-gulp.task('build', ['lint'], function(){
-	gulp.src([
+gulp.task('build', gulp.series(  'lint', function(){	
+	 return gulp.src([
 		'src/intro.js',
 		'src/classes/Math/**.js',
 		'src/libglobals.js',
@@ -24,10 +24,10 @@ gulp.task('build', ['lint'], function(){
 	])
 	.pipe( concat( 'goblin.js' ) )
 	.pipe( gulp.dest( 'build' ) );
-});
+}));
 
-gulp.task('build-minified', ['lint'], function(){
-	gulp.src([
+gulp.task('build-minified', gulp.series('lint', function(){
+	return gulp.src([
 		'src/intro.js',
 		'src/classes/Math/**.js',
 		'src/libglobals.js',
@@ -40,6 +40,6 @@ gulp.task('build-minified', ['lint'], function(){
 	.pipe( concat( 'goblin.min.js' ) )
 	.pipe( uglify() )
 	.pipe( gulp.dest( 'build' ) );
-});
+}));
 
-gulp.task('default', ['build', 'build-minified'], function(){});
+gulp.task('default', gulp.series( 'build', gulp.series( 'build-minified', function(done){done()})));
