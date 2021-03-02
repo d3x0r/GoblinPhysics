@@ -65,12 +65,11 @@ Goblin.GjkEpa = {
      * @param object_b {Goblin.RigidBody}
      * @return {Goblin.ContactDetails|Boolean} Returns `null` if no collision, else a `ContactDetails` object
      */
-	GJK: (function(){
-        return function( object_a, object_b ) {
+	GJK: function( object_a, object_b ) {
             var simplex = new Goblin.GjkEpa.Simplex( object_a, object_b ),
                 last_point;
 
-			Goblin.GjkEpa.result = null;
+		Goblin.GjkEpa.result = null;
 
             while ( ( last_point = simplex.addPoint() ) ){}
 
@@ -81,8 +80,7 @@ Goblin.GjkEpa = {
             }
 
             return simplex;
-        };
-    })(),
+        },
 
 	freeSimplex: function( simplex ) {
 		// Free the support points used by this simplex

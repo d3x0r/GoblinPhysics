@@ -19,6 +19,7 @@ gulp.task('build', gulp.series(  'lint', function(){
 		'src/classes/EventEmitter.js',
 		'src/classes/RigidBody.js',
 		'src/classes/ForceGenerator.js',
+		'src/classes/shapes/TriangleShape.js',
 		'src/classes/**/*.js',
 		'src/outro.js'
 	])
@@ -34,6 +35,7 @@ gulp.task('build-minified', gulp.series('lint', function(){
 		'src/classes/EventEmitter.js',
 		'src/classes/RigidBody.js',
 		'src/classes/ForceGenerator.js',
+		'src/classes/shapes/TriangleShape.js',
 		'src/classes/**/*.js',
 		'src/outro.js'
 	])
